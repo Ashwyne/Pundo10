@@ -56,8 +56,13 @@ int length,fd,rcnt,optval;
 pid_t pid;
     int str;
     int PORT=0;
-    while((str=getopt(argc,argv,"p:"))!=-1){
+    char *direct=NULL;
+    while((str=getopt(argc,argv,"d:p:"))!=-1){
         switch(str){
+            case 'd':
+                direct=optarg;
+                break;
+                
             case 'p':
                 PORT=atoi(optarg);
                 break;
@@ -66,8 +71,8 @@ pid_t pid;
                        return 1;
                            }
                        }
-                       if (PORT==0){
-                    printf("You can enter port number\n");
+                       if (direct==NULL||PORT==0){
+                    printf("Please provide all arguements\n");
                            return 1;
                            }
                 
