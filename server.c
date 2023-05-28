@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include  <getopt.h>    
 
 /* Socket API headers */
 #include <sys/socket.h>
@@ -12,7 +13,6 @@
 
 /* Definations */
 #define DEFAULT_BUFLEN 512
-#define PORT 9807(Change me!)
 
 void do_job(int fd) {
 int length,rcnt;
@@ -47,13 +47,25 @@ int  recvbuflen = DEFAULT_BUFLEN;
 
 
 
-int main()
+int main(int argc,char *argv[])
+    
 {
 int server, client;
 struct sockaddr_in local_addr;
 struct sockaddr_in remote_addr;
 int length,fd,rcnt,optval;
 pid_t pid;
+    int str;
+    int PORT=0;
+    while((str=getopt(argc,argv,"p:"))!=-1){
+        switch(opt){
+                case 'p';
+                PORT=atoi(optarg);
+                break;
+            default:
+                fprint(stderr,"value of port using -p",argv[0];
+                       return 1;
+                       }
 
 /* Open socket descriptor */
 if ((server = socket( AF_INET, SOCK_STREAM, 0)) < 0 ) { 
