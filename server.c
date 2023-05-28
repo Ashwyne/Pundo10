@@ -1,5 +1,4 @@
-*/
-/* C header files */
+
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,7 +58,7 @@ pid_t pid;
     int PORT=0;
     while((str=getopt(argc,argv,"p:"))!=-1){
         switch(str){
-                case 'p';
+            case 'p':
                 PORT=atoi(optarg);
                 break;
             default:
