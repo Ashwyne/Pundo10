@@ -58,7 +58,7 @@ pid_t pid;
     int str;
     int PORT=0;
     while((str=getopt(argc,argv,"p:"))!=-1){
-        switch(opt){
+        switch(str){
                 case 'p';
                 PORT=atoi(optarg);
                 break;
@@ -67,7 +67,7 @@ pid_t pid;
                        return 1;
                            }
                        }
-                       if (PORT)==0){
+                       if (PORT==0){
                     printf("You can enter port number\n";
                            return 1;
                            }
