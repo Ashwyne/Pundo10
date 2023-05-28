@@ -62,7 +62,7 @@ pid_t pid;
                 PORT=atoi(optarg);
                 break;
             default:
-                fprint(stderr,"value of port using -p",argv[0]);
+                fprintf(stderr,"value of port using -p",argv[0]);
                        return 1;
                            }
                        }
