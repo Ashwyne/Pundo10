@@ -63,12 +63,12 @@ pid_t pid;
                 PORT=atoi(optarg);
                 break;
             default:
-                fprint(stderr,"value of port using -p",argv[0];
+                fprint(stderr,"value of port using -p",argv[0]);
                        return 1;
                            }
                        }
                        if (PORT==0){
-                    printf("You can enter port number\n";
+                    printf("You can enter port number\n");
                            return 1;
                            }
                 
