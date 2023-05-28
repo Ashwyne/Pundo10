@@ -65,7 +65,13 @@ pid_t pid;
             default:
                 fprint(stderr,"value of port using -p",argv[0];
                        return 1;
+                           }
                        }
+                       if (PORT)==0){
+                    printf("You can enter port number\n";
+                           return 1;
+                           }
+                
 
 /* Open socket descriptor */
 if ((server = socket( AF_INET, SOCK_STREAM, 0)) < 0 ) { 
