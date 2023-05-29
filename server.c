@@ -58,6 +58,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
             char c[]="Server closing.......\nGoodbye!";
                send(fd,c,strlen(c),0);
                 close(fd);
+                print("\n);
             } 
                 else{
                 printf("Wrong command please try another");
