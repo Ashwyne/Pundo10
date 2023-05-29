@@ -53,6 +53,24 @@ int  recvbuflen = DEFAULT_BUFLEN;
             printf("Bytes received: %d\n", rcnt);
             if(strncmp(recvbuf,"LIST",4)==0){
             a(fd,direct);
+            }
+            else if(strncmp(recvbuf,"DEL",3)==0){
+                char filename[DEFAULT_BUFLEN];
+                sscanf(recvbuf,"DEL %s",filename);
+                char pathway[DEFAULT_BUFLEN];
+                snprint(pathway,DEFAULT_BUFLEN,"%s/%s",direct,filename);
+                FILE* file=fopen(pathway,"rb");
+                if(remove(file)==0){
+                    char z[DEFAULT_BUFLEN];
+                    snprintf(z,DEFAULT_BUFLEN,"File deleted\n",pathway);
+                    send(fd,z,strlen(z),0);
+                }
+                else{
+                      char g[DEFAULT_BUFLEN];
+                    snprintf(g,DEFAULT_BUFLEN,"File deleted\n",pathway);
+                    send(fd,g,strlen(g),0);
+                }
+            
             }else if(strncmp(recvbuf,"QUIT",4)==0){
             char c[]="Server closing.......\nGoodbye!";
                send(fd,c,strlen(c),0);
