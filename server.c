@@ -22,7 +22,7 @@ void a(int client_fd,const char* direct){
     struct stat file_stat;
     char buffer[DEFAULT_BUFLEN];
     
-    dir=opendir(direct)
+    dir=opendir(direct);
         if(dir==NULL){
             printf("Your directory could not be opened");
             return;
