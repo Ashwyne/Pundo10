@@ -59,8 +59,8 @@ int  recvbuflen = DEFAULT_BUFLEN;
                 sscanf(recvbuf,"DEL %s",filename);
                 char pathway[DEFAULT_BUFLEN];
                 snprintf(pathway,DEFAULT_BUFLEN,"%s/%s",direct,filename);
-                FILE *file=fopen(pathway,"rb");
-                if(remove(file)==0){
+                FILE* file=fopen(pathway,"rb");
+                if(remove(filename)==0){
                     char z[DEFAULT_BUFLEN];
                     snprintf(z,DEFAULT_BUFLEN,"File deleted\n",pathway);
                     send(fd,z,strlen(z),0);
