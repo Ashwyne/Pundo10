@@ -44,7 +44,7 @@ void do_job(int fd,const char* direct) {
 int length,rcnt;
 char recvbuf[DEFAULT_BUFLEN],bmsg[DEFAULT_BUFLEN];
 int  recvbuflen = DEFAULT_BUFLEN;
-  char b[]="Welcome to Ashwin's server";
+  char b[]="Welcome to Ashwin's server\n";
     send(fd,b,strlen(b),0);
     // Receive until the peer shuts down the connection
     do {
@@ -53,7 +53,13 @@ int  recvbuflen = DEFAULT_BUFLEN;
             printf("Bytes received: %d\n", rcnt);
             if(strncmp(recvbuf,"LIST",4)==0){
             a(fd,direct);
-            }else{
+            }
+            else if(strncmp(recvbuf,"QUIT",4)==0){
+            char c[]="Server closing.......\nGoodbye!";
+               send(fd,c,strlen(c),0);
+                close(fd);
+            } 
+                else{
                 printf("Wrong command please try another");
             }
         }
