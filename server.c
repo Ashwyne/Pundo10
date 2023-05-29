@@ -58,7 +58,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
                 char filename[DEFAULT_BUFLEN];
                 sscanf(recvbuf,"DEL %s",filename);
                 char pathway[DEFAULT_BUFLEN];
-                snprint(pathway,DEFAULT_BUFLEN,"%s/%s",direct,filename);
+                snprintf(pathway,DEFAULT_BUFLEN,"%s/%s",direct,filename);
                 FILE* file=fopen(pathway,"rb");
                 if(remove(file)==0){
                     char z[DEFAULT_BUFLEN];
