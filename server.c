@@ -67,10 +67,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
                     printf("Error deleting file: %s\n", filename);
                     send(fd, "404 Error: File not found on the server.", strlen("404 Error: File not found on the server."), 0);
                 }
-            } else {
-                printf("Invalid command.\n");
-                send(fd, "400 Error: Invalid command.", strlen("400 Error: Invalid command."), 0);
-            }
+            
             else if(strncmp(recvbuf,"QUIT",4)==0){
             char c[]="Server closing.......\nGoodbye!";
                send(fd,c,strlen(c),0);
