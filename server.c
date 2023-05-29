@@ -44,7 +44,7 @@ void do_job(int fd,const char* direct) {
 int length,rcnt;
 char recvbuf[DEFAULT_BUFLEN],bmsg[DEFAULT_BUFLEN];
 int  recvbuflen = DEFAULT_BUFLEN;
-  char b[]="Welcome to Ashwin's server\n";
+  char b[]="Welcome to Ashwyne's server\n";
     send(fd,b,strlen(b),0);
     // Receive until the peer shuts down the connection
     do {
@@ -141,7 +141,7 @@ if ( listen( server, SOMAXCONN ) < 0 ) {
         exit(1);
 }
 
-printf("Ashwin's server is Listening on port %d\n",PORT);
+printf("Ashwyne's server is Listening on port %d\n",PORT);
 
 
 while(1) {  // main accept() loop
