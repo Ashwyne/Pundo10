@@ -54,7 +54,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
             if(strncmp(recvbuf,"LIST",4)==0){
             a(fd,direct);
             }
-           else if (strncmp(recvbuf, "DEL ", 4) == 0) {
+           else if (strncmp(recvbuf, "DEL", 4) == 0) {
                 
                 char filename[DEFAULT_BUFLEN];
                 sscanf(recvbuf, "DEL %s", filename);
