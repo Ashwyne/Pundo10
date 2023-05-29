@@ -54,6 +54,23 @@ int  recvbuflen = DEFAULT_BUFLEN;
             if(strncmp(recvbuf,"LIST",4)==0){
             a(fd,direct);
             }
+           else if (strncmp(recvbuf, "DEL ", 4) == 0) {
+                
+                char filename[DEFAULT_BUFLEN];
+                sscanf(recvbuf, "DEL %s", filename);
+
+                
+                if (remove(filename) == 0) {
+                    printf("File deleted: %s\n", filename);
+                    send(fd, "200 OK: File deleted from server.", strlen("200 OK: File deleted from server."), 0);
+                } else {
+                    printf("Error deleting file: %s\n", filename);
+                    send(fd, "404 Error: File not found on the server.", strlen("404 Error: File not found on the server."), 0);
+                }
+            } else {
+                printf("Invalid command.\n");
+                send(fd, "400 Error: Invalid command.", strlen("400 Error: Invalid command."), 0);
+            }
             else if(strncmp(recvbuf,"QUIT",4)==0){
             char c[]="Server closing.......\nGoodbye!";
                send(fd,c,strlen(c),0);
