@@ -1,9 +1,13 @@
 
 #include <sys/types.h>
 #include <stdio.h>
+#include<sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
-#include  <getopt.h>    
+#include  <getopt.h> 
+#include<dirent.h>
+#include<unistd.h>
+
 
 /* Socket API headers */
 #include <sys/socket.h>
@@ -12,28 +16,49 @@
 
 /* Definations */
 #define DEFAULT_BUFLEN 512
+void a(int client_fd,const char* direct){
+    DIR* dir;
+    struct dirent* entry;
+    struct stat file_stat;
+    char buffer[DEFAULT_BUFLEN];
+    
+    dir=opendir(direct)
+        if(dir==NULL){
+            printf("Your directory could not be opened");
+            return;
+        }
+    while((entry = readdir(dir))!=NULL){
+        char filePath[DEFAULT_BUFLEN];
+                snprintf(filePath,DEFAULT_BUFLEN,"%s/%s",direct,entry->d_name);
+     if(stat(filePath,&file_stat)<0)
+         continue;
+       if(S_ISDIR(file_stat.st_mode))
+           continue;
+        snprintf(buffer,DEFAULT_BUFLEN,"%s %d bytes\n",entry->d_name,file_stat.st_size);
+        send(client_fd,buffer,strlen(buffer),0);
+    }
 
+closedir(dir);
+}
 void do_job(int fd) {
 int length,rcnt;
 char recvbuf[DEFAULT_BUFLEN],bmsg[DEFAULT_BUFLEN];
 int  recvbuflen = DEFAULT_BUFLEN;
-
+  char b[]="Welcome to Ashwin's server";
+    send(fd,b,strlen(b),0);
     // Receive until the peer shuts down the connection
     do {
         rcnt = recv(fd, recvbuf, recvbuflen, 0);
         if (rcnt > 0) {
             printf("Bytes received: %d\n", rcnt);
-
-        // Echo the buffer back to the sender
-        rcnt = send( fd, recvbuf, rcnt, 0 );
-            if (rcnt < 0) {
-                printf("Send failed:\n");
-                close(fd);
-                break;
+            if(strncmp(recvbuf,"LIST",4)==0){
+            a(fd,direct);
+            }else{
+                printf("Wrong command please try another");
             }
-            printf("Bytes sent: %d\n", rcnt);
-
         }
+
+       
         else if (rcnt == 0)
             printf("Connection closing...\n");
         else  {
@@ -126,7 +151,7 @@ while(1) {  // main accept() loop
     /* If fork create Child, take control over child and close on server side */
     if ((pid=fork()) == 0) {
         close(server);
-        do_job(fd);
+        do_job(fd,direct);
         printf("Child finished their job!\n");
         close(fd);
         exit(0);
