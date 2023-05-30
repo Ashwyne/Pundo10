@@ -58,7 +58,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
             char name[DEFAULT_BUFLEN];
              sscanf(recvbuf,"GET %s",name);
              char pathh[DEFAULT_BUFLEN];
-             snprintf(pathh,DEFAULT_BUFLEN,"%s/%s",pathh,name);
+             snprintf(pathh,DEFAULT_BUFLEN,"%s/%s",direct,name);
              FILE *file = fopen(pathh,"rb");
              if(file==NULL){
              char err[DEFAULT_BUFLEN];
