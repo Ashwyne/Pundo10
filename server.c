@@ -54,24 +54,28 @@ int  recvbuflen = DEFAULT_BUFLEN;
             if(strncmp(recvbuf,"LIST",4)==0){
             a(fd,direct);
             }
-            else if(strncmp(recvbuf,"DEL",3)==0){
-                char filename[DEFAULT_BUFLEN];
-                sscanf(recvbuf,"DEL %s",filename);
-                char pathway[DEFAULT_BUFLEN];
-                snprintf(pathway,DEFAULT_BUFLEN,"%s/%s",direct,filename);
-                FILE* file=fopen(pathway,"rb");
-                if(remove(filename)==0){
-                    char z[DEFAULT_BUFLEN];
-                    snprintf(z,DEFAULT_BUFLEN,"File deleted\n",pathway);
-                    send(fd,z,strlen(z),0);
-                }
-                else{
-                      char g[DEFAULT_BUFLEN];
-                    snprintf(g,DEFAULT_BUFLEN,"File deleted\n",pathway);
-                    send(fd,g,strlen(g),0);
-                }
-            
-            }else if(strncmp(recvbuf,"QUIT",4)==0){
+         else if(strncmp(recvbuf,"GET",3)==0){
+            char name[DEFAULT_BUFLEN];
+             sscanf(recvbuf,"GET %s",name);
+             char pathh[DEFAULT_BUFLEN];
+             snprintf(pathh,DEFAULT_BUFLEN,"%s/%s",pathh,name);
+             FILE *file = fopen(pathh,"rb");
+             if(file==NULL){
+             char err[DEFAULT_BUFLEN];
+             snprintf(err,DEFAULT_BUFLEN,"This file does not exist on server\n");
+             send(fd,err,strlen(err),0);
+             }
+             else{
+                char buff[DEFAULT_BUFLEN];
+                 size_t bytes_read;
+                 while((bytes_read=fread(buff,1,DEFAULT_BUFLEN,file))>0){
+                 send(fd,buffer,bytes_read,0);
+                 }
+                 fclose(file);
+             } 
+         
+         }
+            else if(strncmp(recvbuf,"QUIT",4)==0){
             char c[]="Server closing.......\nGoodbye!";
                send(fd,c,strlen(c),0);
                 close(fd);
