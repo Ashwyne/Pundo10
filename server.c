@@ -69,7 +69,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
                 char buff[DEFAULT_BUFLEN];
                  size_t bytes_read;
                  while((bytes_read=fread(buff,1,DEFAULT_BUFLEN,file))>0){
-                 send(fd,buffer,bytes_read,0);
+                 send(fd,buff,bytes_read,0);
                  }
                  fclose(file);
              } 
