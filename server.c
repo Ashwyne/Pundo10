@@ -115,7 +115,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
         }
     } while (rcnt > 0);
 }
-
+else if 
 
 
 int main(int argc,char *argv[])
