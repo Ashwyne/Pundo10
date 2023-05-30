@@ -79,7 +79,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
                 char fname[DEFAULT_BUFLEN];
                  sscanf(recvbuf,"DEL %s",fname);
                 char fpath[DEFAULT_BUFLEN];
-                snprintf(fpath,DEFAULT_BUFLEN,"%s/%s",direct,name);
+                snprintf(fpath,DEFAULT_BUFLEN,"%s/%s",direct,fname);
                 if(remove(fpath)==0){
              char err1[DEFAULT_BUFLEN];
              snprintf(err1,DEFAULT_BUFLEN,"File deleted successfully.\n");
