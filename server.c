@@ -75,6 +75,25 @@ int  recvbuflen = DEFAULT_BUFLEN;
              } 
          
          }
+            else if(strncmp(recvbuf,"DEL",3)==0){
+                char fname[DEFAULT_BUFLEN];
+                 sscanf(recvbuf,"DEL %s",fname);
+                char fpath[DEFAULT_BUFLEN];
+                snprintf(fpath,DEFAULT_BUFLEN,"%s/%s",direct,name);
+                if(remove(fpath)==0){
+             char err1[DEFAULT_BUFLEN];
+             snprintf(err1,DEFAULT_BUFLEN,"File deleted successfully.\n");
+             send(fd,err1,strlen(err1),0);
+                }
+                else{
+                    char err2[DEFAULT_BUFLEN];
+             snprintf(err2,DEFAULT_BUFLEN,"File not found.\n");
+             send(fd,err2,strlen(err2),0);
+                }
+                
+                }
+            
+            }
             else if(strncmp(recvbuf,"QUIT",4)==0){
             char c[]="Server closing.......\nGoodbye!";
                send(fd,c,strlen(c),0);
