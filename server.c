@@ -91,7 +91,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
              send(fd,err2,strlen(err2),0);
                 }
                 
-                }
+                
             
             }
             else if(strncmp(recvbuf,"QUIT",4)==0){
